@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "mysql2": "^3.11.3"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.7"
   }
 }
