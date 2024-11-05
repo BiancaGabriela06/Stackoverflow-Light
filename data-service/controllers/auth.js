@@ -1,8 +1,7 @@
 const express = require('express');
 
 const signUpController = async (req, res) => {
-    console.log("signUpController")
-    console.log(req.body);
+    console.log("data-service ", req.body);
 };
 
 module.exports = {

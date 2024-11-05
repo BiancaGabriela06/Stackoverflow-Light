@@ -5,7 +5,7 @@ const db = require('./database');
 const authRoutes = require("./routes/auth");
 
 const port = process.env.PORT || 8000;
-
+app.use(express.json());
 router.use(function (req, res, next) {
     console.log('/' + req.method);
     next();

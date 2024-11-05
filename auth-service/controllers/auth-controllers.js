@@ -1,17 +1,32 @@
-const express = require('express');
 const axios = require('axios');
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
+
 
 const signUpController = async (req, res) => {
-    console.log("signUpController")
-    console.log(req.body);
+    console.log("auth-service ", req.body);
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+       return res.status(400).json({errors: errors.array()});
+    }
+    
+    const hashedPassword = await promisify(bycript.hash)(req.body.password, 10);
+
+    const user = {
+        username: req.body.name,
+        email: req.body.email,
+        password: hashedPassword
+    }
+
     try {
-        //const response = await axios.post('http://data-service:8000/sign-up', req.body);
-        console.log('?');
-        console.log("something");
-        //res.status(response.status).send(response.data);
+        const response = await axios.post(`${process.env.DATA_SERVICE_URL}/auth/sign-up`, user, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error sending data to data-servoce:', error);
-       // res.status(500).send('Error saving data to database');
+        console.error('Error sending data to data-service:', error);
+        res.status(500).send('Error saving data to database');
     }
 };
 
