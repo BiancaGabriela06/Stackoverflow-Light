@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { validationResult } = require('express-validator');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 const signUpController = async (req, res) => {
@@ -11,7 +11,7 @@ const signUpController = async (req, res) => {
        return res.status(400).json({errors: errors.array()});
     }
     
-    const hashedPassword = await promisify(bycript.hash)(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const user = {
         username: req.body.name,
