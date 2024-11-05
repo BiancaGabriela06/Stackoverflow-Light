@@ -18,4 +18,22 @@ db.connect((err) => {
     }
 });
 
+const createUsersTable = `
+    Create Table IF not exists users (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       name VARCHAR(100) NOT NULL,
+       email VARCHAR(100) UNIQUE NOT NULL,
+       password VARCHAR(255) NOT NULL,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+       )
+`;
+
+db.query(createUsersTable, (err, results) => {
+    if (err){
+        console.error("Error creating table: ", err);
+    } else {
+      console.log('Table users created or already exists');
+    }
+})
+
 module.exports = db;

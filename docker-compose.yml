@@ -46,6 +46,10 @@ services:
     container_name: 'app-service'
     ports: 
       - 8080:8080
+    volumes: 
+      - .:/app-service
+    environment:
+      - AUTH_SERVICE_URL=http:/localhost:8080
     depends_on:
       mysql:
         condition: service_healthy
