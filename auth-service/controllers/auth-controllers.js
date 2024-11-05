@@ -30,9 +30,23 @@ const signUpController = async (req, res) => {
     }
 };
 
-const loginController = (req, res) => {
-    console.log("loginController")
-   
+const loginController = async (req, res) => {
+   const errors = validationResult(req)
+
+   if (!errors.isEmpty()) {
+    return res.status(400).json({errors: errors.array()});
+   }
+
+   try {
+    const response = await axios.post(`${process.env.DATA_SERVICE_URL}/auth/login`, req.body, {
+        headers: { 'Content-Type': 'application/json' },
+    });
+    res.status(response.status).send(response.data);
+    } catch (error) {
+        console.error('Error sending data to data-service:', error);
+        res.status(500).send('Error login');
+    }
+ 
 }
 
 const forgotPasswordController = (req, res) => {

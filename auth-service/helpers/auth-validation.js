@@ -17,6 +17,12 @@ const signUpValidation = [
         })
 ];
 
+const loginValidation = [
+    body('email').notEmpty().isEmail().withMessage('Must be a valid email'),
+    body('password').notEmpty()
+]
+
 module.exports = {
-    signUpValidation
+    signUpValidation,
+    loginValidation
 }
