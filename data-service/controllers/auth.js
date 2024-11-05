@@ -31,7 +31,6 @@ const signUpController = async (req, res) => {
 
 const loginController = async (req, res) => {
     try {
-        
         db.query('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [req.body.email], async (err, data) => {
             if(err) {
                 console.log(err);
@@ -60,7 +59,38 @@ const loginController = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+const forgotPasswordController = async (req, res) => {
+    try{
+        db.query('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [req.body.email], async (err, data) => {
+            if(err) {
+                console.log(err);
+                return res.status(500).json({ message: 'Internal server error' });
+            } 
+            if(data.length === 0) {
+                console.log("User not found");
+                return res.status(404).json({ Status: "Error", Error: "Wrong email or password." });
+
+            }
+            db.query( 'UPDATE users SET password = ? WHERE LOWER(email) = LOWER(?)',
+                [req.body.newPassword, req.body.email], (err, result) => {
+                  if(err){
+                    console.log(err);
+                    return res.json(err);
+                  } else {
+                    res.status(200).json({
+                        message: 'Password updated succesfully!',
+                    });
+                  }
+                })  
+
+        }) 
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
 module.exports = {
     signUpController,
-    loginController
+    loginController,
+    forgotPasswordController
 };
