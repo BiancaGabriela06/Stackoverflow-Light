@@ -46,11 +46,32 @@ const loginController = async (req, res) => {
         console.error('Error sending data to data-service:', error);
         res.status(500).send('Error login');
     }
- 
 }
 
-const forgotPasswordController = (req, res) => {
-    console.log("signUpController")
+const forgotPasswordController = async (req, res) => {
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+     return res.status(400).json({errors: errors.array()});
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, 10);
+
+    const user = {
+        email: req.body.email,
+        newPassword: hashedPassword
+    }
+
+
+    try {
+     const response = await axios.post(`${process.env.DATA_SERVICE_URL}/auth/forgot-password`, user, {
+         headers: { 'Content-Type': 'application/json' },
+     });
+     res.status(response.status).send(response.data);
+     } catch (error) {
+         console.error('Error sending data to data-service:', error);
+         res.status(500).send('Error change password');
+     }
 }
 
 const deleteAccountController = (req, res) => {
