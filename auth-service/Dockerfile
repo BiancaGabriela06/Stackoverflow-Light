@@ -4,8 +4,8 @@
 ARG NODE_VERSION=20.5.0
 FROM node:${NODE_VERSION}-alpine
 
-# Use production node environment by default
-ENV NODE_ENV production
+# Use development node environment to utilize nodemon effectively
+ENV NODE_ENV development
 
 WORKDIR /usr/src/app
 
@@ -25,5 +25,5 @@ USER node
 # Expose the application's port
 EXPOSE 8088
 
-# Run the application
-CMD ["npm", "start"]
+# Run the application with nodemon
+CMD ["npx", "nodemon", "-L", "index.js"]

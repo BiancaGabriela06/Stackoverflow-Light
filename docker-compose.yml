@@ -21,6 +21,8 @@ services:
     build:
       context: ./data-service
     container_name: 'data-service'
+    volumes: 
+      - 'C:/Users/bianc/Desktop/Stackoverflow-Light/data-service:/usr/src/app'
     environment:
       DB_HOST: mysql  # This should be the service name
       DB_PORT: 3306  # Use the internal MySQL port
@@ -37,6 +39,10 @@ services:
     build:
       context: ./auth-service
     container_name: 'auth-service'
+    environment:
+      DATA_SERVICE_URL: http://data-service:8000
+    volumes: 
+      - 'C:/Users/bianc/Desktop/Stackoverflow-Light/auth-service:/usr/src/app'
     ports: 
       - 8088:8088
     depends_on:
@@ -50,9 +56,9 @@ services:
     ports: 
       - 8080:8080
     volumes: 
-      - .:/app-service
+      - 'C:/Users/bianc/Desktop/Stackoverflow-Light/app-service:/usr/src/app'
     environment:
-      AUTH_SERVICE_URL: http://auth-service:8088  # Use the service name here
+      AUTH_SERVICE_URL: http://auth-service:8088 
     depends_on:
       mysql:
         condition: service_healthy
