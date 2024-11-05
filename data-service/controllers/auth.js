@@ -1,5 +1,6 @@
 const moment = require('moment');
 const db = require('../database');
+const bcrypt = require('bcryptjs')
 
 const signUpController = async (req, res) => {
     try {
@@ -28,6 +29,38 @@ const signUpController = async (req, res) => {
     }
 };
 
+const loginController = async (req, res) => {
+    try {
+        
+        db.query('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [req.body.email], async (err, data) => {
+            if(err) {
+                console.log(err);
+                return res.status(500).json({ message: 'Internal server error' });
+            } 
+            if(data.length === 0) {
+                console.log("User not found");
+                return res.status(404).json({ Status: "Error", Error: "Wrong email or password." });
+
+            }
+            
+            const isPasswordCorrect = await bcrypt.compare(
+                req.body.password, 
+                data[0].password
+            );
+    
+            if(!isPasswordCorrect){
+              console.log("Wrong password!")
+              return res.status(401).json({ Status: "Error", Error: "Wrong email or password." });
+            } 
+
+            return res.status(200).json({message: "Success", data: data[0].username})
+
+        }) 
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
 module.exports = {
-    signUpController
+    signUpController,
+    loginController
 };
