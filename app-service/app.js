@@ -3,7 +3,7 @@ const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 require('dotenv').config()
-console.log(process.env.AUTH_SERVICE_URL);
+console.log("AUTH_SERVICE_URL ", process.env.AUTH_SERVICE_URL);
 
 const port = process.env.PORT || 8080;
 
