@@ -31,6 +31,8 @@ const signUpController = async (req, res) => {
 };
 
 const loginController = async (req, res) => {
+    //res.oidc.login();
+    
    const errors = validationResult(req)
 
    if (!errors.isEmpty()) {
