@@ -1,29 +1,28 @@
 const moment = require('moment');
 const db = require('../database');
 const bcrypt = require('bcryptjs')
+const AuthService = require('../services/authService')
 
 const signUpController = async (req, res) => {
     try {
-        // Check if the user already exists
-        db.query('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [req.body.email], (err, result) => {
-            if(err) {
-                console.log(err);
-                return res.json(err);
-            } 
-        })
+        const userExists = await AuthService.findUserByEmail(req.body.email);
+        
+        if (userExists.length > 0) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
 
         const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
-        db.query('INSERT INTO users (username, email, password, created_at) VALUES (?, ?, ?, ?)',
-            [req.body.username, req.body.email, req.body.password, createdAt], (err, result) => {
-              if(err){
-                console.log(err);
-                return res.json(err);
-              } else {
-                res.status(201).json({
-                    message: 'User registered successfully!',
-                });
-              }
-            })    
+        const user = {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            createdAt: createdAt
+        }
+        await AuthService.createUser(user);
+
+        res.status(201).json({
+            message: 'User registered successfully!',
+        });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
