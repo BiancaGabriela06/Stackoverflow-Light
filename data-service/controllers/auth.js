@@ -1,5 +1,5 @@
 const moment = require('moment');
-const db = require('../database');
+const db = require('../database/createDatabase');
 const bcrypt = require('bcryptjs')
 const AuthService = require('../services/authService')
 

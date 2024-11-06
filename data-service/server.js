@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
+const db = require('./database/createDatabase');
 const authRoutes = require("./routes/auth");
 
 const port = process.env.PORT || 8000;
