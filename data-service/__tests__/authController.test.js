@@ -1,7 +1,7 @@
 jest.useFakeTimers()
 
 const AuthService = require('../services/authService'); // Adjust to your actual service file
-const { signUpController } = require('../controllers/auth');
+const { signUpController } = require('../controllers/authController');
 
 jest.mock('../services/authService');
 
