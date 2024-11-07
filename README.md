@@ -132,7 +132,7 @@ The `docker-compose.yml` file is configured to set up the necessary services:
     {
       "question_id": 1,
       "user_id": 2,
-      "vote_type": "upvote"  // can be 'upvote' or 'downvote'
+      "vote_type": 0  // can be 1 for 'upvote' or 0 for 'downvote'
     }
     ```
   - **Response**:

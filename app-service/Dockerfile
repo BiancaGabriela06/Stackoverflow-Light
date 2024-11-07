@@ -16,11 +16,16 @@ COPY package.json package-lock.json ./
 RUN npm install -g nodemon
 RUN npm ci --omit=dev
 
+
+RUN mkdir -p /usr/src/app-service/middleware && \
+    chmod -R 755 /usr/src/app-service
+    
 # Copy the rest of the application code
 COPY . .
 
 # Run as a non-root user
 USER node
+
 
 # Expose the application's port
 EXPOSE 8080

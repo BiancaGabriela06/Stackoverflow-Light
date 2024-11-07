@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const popularDay = async (req, res) => {
     console.log("most popular day of the week");
 }
@@ -14,4 +12,11 @@ const averageQuestions = async (req, res) => {
 
 const averageAnswerPerUser = async (req, res) => {
     console.log("average answer per user");
+}
+
+module.exports = {
+    popularDay,
+    averageVotes,
+    averageQuestions,
+    averageAnswerPerUser
 }

@@ -3,23 +3,21 @@ const QuestionsService = require('../services/questionsService');
 
 const insertQuestion = async (req, res) => {
    try {
+        const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
+        const question = {
+            user_id: req.body.user_id,
+            text: req.body.text,
+            created_at: createdAt
+        }
 
-    console.log("Data service ", req.body)
-    const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
-    const question = {
-        user_id: req.body.user_id,
-        text: req.body.text,
-        created_at: createdAt
-    }
+        await QuestionsService.insertQuestion(question);
 
-    await QuestionsService.insertQuestion(question);
-
-    res.status(201).json({
-         message: 'Question added successfully!',
-    });
+        res.status(201).json({
+            message: 'Question added successfully!',
+        });
 
    } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({ message: 'Internal server error' });
    }
 };
 
@@ -75,12 +73,8 @@ const addVoteQuestion = async (req, res) => {
             createdAt: createdAt
         }
 
-        console.log(vote);
-
         await QuestionsService.voteQuestion(vote);
-        res.status(200).json({
-            message: 'Success',
-       });
+        res.status(200).json({ message: 'Success'});
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
@@ -98,9 +92,7 @@ const addAnswerQuestion = async (req, res) => {
         }
 
         await QuestionsService.answerQuestion(answer);
-        res.status(200).json({
-            message: 'Success'
-       });
+        res.status(200).json({ message: 'Success'});
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });

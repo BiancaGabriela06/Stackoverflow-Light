@@ -2,7 +2,6 @@ const db = require('../database/createDatabase');
 
 const QuestionsService = {
     insertQuestion: (question) => {
-        console.log(question);
         return new Promise((resolve, reject) => {
             db.query(
                 'INSERT INTO questions (user_id, text, created_at) VALUES (?, ?, ?)',
@@ -73,8 +72,7 @@ const QuestionsService = {
                 [id],
                 (err, result) => {
                     if (err) {
-                        console.log(err)
-                       // return reject(err);
+                       return reject(err);
                     }
                     resolve(result);
                 }

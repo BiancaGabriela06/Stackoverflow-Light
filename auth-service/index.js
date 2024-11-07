@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { auth } = require("express-openid-connect");
 const { randomBytes } = require("crypto");
-const routes = require("./routes/auth");
+const authRoutes = require("./routes/authRoutes");
 
 require('dotenv').config()
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', routes);
+app.use('/', authRoutes);
 
 // app.get("/", requiresAuth(), (req, res) => {
 //   req.oidc.fetchUserInfo().then((userInfo) => {
@@ -53,5 +53,5 @@ app.use('/', routes);
 // });
 
 app.listen(port, function () {
-  console.log('App listening on port ' + port + '!');
+  console.log('http://localhost:' + port + '/');
 });

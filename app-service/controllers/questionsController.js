@@ -7,8 +7,7 @@ const getQuestions = async (req, res) => {
         });
         res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error get questions to data-service:', error);
-        res.status(500).send('Error saving data to database');
+        res.status(500).send('Error getting questions from database');
     }
 }
 
@@ -19,8 +18,7 @@ const getQuestion = async (req, res) => {
         });
         res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error get questions to data-service:', error);
-        res.status(500).send('Error saving data to database');
+        res.status(500).send('Error getting question with given id from database');
     }
 }
 
@@ -32,12 +30,9 @@ const insertQuestion = async (req, res) => {
 
         res.status(response.status).send(response.message);
     } catch (error) {
-        console.error('Error message:', error);
-        console.error('Error sending data to data-service:', error.toJSON());
         res.status(500).send('Error saving data to database ');
     }
 }
-
 
 const deleteQuestion = async (req, res) => {
     try {
@@ -46,8 +41,7 @@ const deleteQuestion = async (req, res) => {
         });
         res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error sending data to data-service:', error);
-        res.status(500).send('Error saving data to database');
+        res.status(500).send('Error deleting data from database');
     }
 }
 
@@ -60,7 +54,6 @@ const voteQuestion = async (req, res) => {
         });
         res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error sending data to data-service:', error);
         res.status(500).send('Error saving data to database');
     }
 }
@@ -72,8 +65,7 @@ const answerQuestion = async (req, res) => {
         });
         res.status(response.status).send(response.data);
     } catch (error) {
-        console.error('Error sending data to data-service:', error);
-        res.status(500).send('Error saving data to database');
+        res.status(500).send('Error getting answers for the question with given id from database');
     }
 }
 

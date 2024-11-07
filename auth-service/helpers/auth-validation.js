@@ -25,6 +25,7 @@ const loginValidation = [
 const forgotPasswordValidation = [
     body('email').notEmpty().isEmail().withMessage('Must be a valid email'),
     body('newPassword')
+        .notEmpty().withMessage('Password is missing.')
         .isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
         .matches(/[a-z]/).withMessage('Password must contain at least one lowercase letter')
         .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')

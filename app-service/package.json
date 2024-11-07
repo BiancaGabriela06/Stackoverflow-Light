@@ -15,8 +15,10 @@
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "fs": "^0.0.1-security",
     "http-proxy-middleware": "^3.0.3",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
