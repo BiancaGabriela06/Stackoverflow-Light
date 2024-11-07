@@ -5,7 +5,7 @@ const { signUpValidation, loginValidation, forgotPasswordValidation } = require(
 const router = express.Router()
 
 router.post('/sign-up', signUpValidation, controllers.signUpController);
-router.post('/login', requiresAuth(), controllers.loginController);
+router.post('/login', loginValidation, controllers.loginController);
 router.post('/forgot-password',forgotPasswordValidation, controllers.forgotPasswordController);
 router.post('/delete-account', controllers.deleteAccountController);
 

@@ -59,6 +59,7 @@ services:
       - 'C:/Users/bianc/Desktop/Stackoverflow-Light/app-service:/usr/src/app'
     environment:
       AUTH_SERVICE_URL: http://auth-service:8088 
+      DATA_SERVICE_URL: http://data-service:8000
     depends_on:
       mysql:
         condition: service_healthy

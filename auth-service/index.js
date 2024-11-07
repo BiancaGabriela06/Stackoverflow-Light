@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { auth, requiresAuth } = require("express-openid-connect");
+const { auth } = require("express-openid-connect");
 const { randomBytes } = require("crypto");
-const routes = require("./routes/auth-routes");
+const routes = require("./routes/auth");
 
 require('dotenv').config()
 

@@ -5,6 +5,7 @@ const questionsRoutes = require('./routes/questions')
 
 require('dotenv').config()
 console.log("AUTH_SERVICE_URL ", process.env.AUTH_SERVICE_URL);
+console.log("DATA_SERVICE_URL ", process.env.DATA_SERVICE_URL);
 
 const port = process.env.PORT || 8080;
 
@@ -23,9 +24,8 @@ app.use('/auth', createProxyMiddleware({
       }, 
 }));
 
+app.use(express.json());
 app.use('/questions', questionsRoutes);
-
-
 app.get('/', (req, res) => {
     console.log("Hei");
     res.send("Hello World");
