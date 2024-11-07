@@ -9,7 +9,6 @@ const authenticate = (req, res, next) => {
     return res.status(401).json({ message: 'No token provided' });
   }
 
-  console.log("Token from request:", token);
 
   const cleanToken = token.startsWith('Bearer ') ? token.slice(7, token.length) : token;
 

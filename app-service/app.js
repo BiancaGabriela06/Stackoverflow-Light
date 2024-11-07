@@ -5,8 +5,6 @@ const questionsRoutes = require('./routes/questionsRoutes');
 const metricsRoutes = require('./routes/metricsRoutes');
 
 require('dotenv').config()
-console.log("AUTH_SERVICE_URL ", process.env.AUTH_SERVICE_URL);
-console.log("DATA_SERVICE_URL ", process.env.DATA_SERVICE_URL);
 
 const port = process.env.PORT || 8080;
 
@@ -32,7 +30,6 @@ app.use('/metrics', metricsRoutes);
 
 
 app.get('/', (req, res) => {
-    console.log("Hei");
     res.send("Hello World");
 });
 

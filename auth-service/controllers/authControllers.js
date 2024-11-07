@@ -56,7 +56,6 @@ const loginController = async (req, res) => {
 
     fs.writeFile(filePath, JSON.stringify(dataToWrite, null, 2), (err) => {
     if (err) {
-        console.log('Error writing to file', err);
         return res.status(500).json({ message: 'Error writing to file' });
     }
     
