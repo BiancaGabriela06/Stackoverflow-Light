@@ -1,6 +1,11 @@
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
+const path = require('path');
+
+const dirPath = path.join(__dirname, '../helpers'); 
+const filePath = path.join(dirPath, 'jwt-token.json')
 
 
 const signUpController = async (req, res) => {
@@ -42,7 +47,22 @@ const loginController = async (req, res) => {
     const response = await axios.post(`${process.env.DATA_SERVICE_URL}/auth/login`, req.body, {
         headers: { 'Content-Type': 'application/json' },
     });
-    res.status(response.status).send(response.data);
+
+    const dataToWrite = {token: response.data.token};
+
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true }); 
+      }
+
+    fs.writeFile(filePath, JSON.stringify(dataToWrite, null, 2), (err) => {
+    if (err) {
+        console.log('Error writing to file', err);
+        return res.status(500).json({ message: 'Error writing to file' });
+    }
+    
+    res.status(response.status).send({ data: response.data, token: response.token });
+    });
+
     } catch (error) {
         console.error('Error sending data to data-service:', error);
         res.status(500).send('Error login');

@@ -145,3 +145,9 @@ To run unit tests in the data-service, use the following command:
 
 *cd data-service*
 *npm test*
+
+## JWT Token
+For obtaining JWT_SECRET run in terminal command
+ openssl rand -base64 64
+
+Copy that and put it in app-service/env

@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 app.use('/auth', createProxyMiddleware({
     target: process.env.AUTH_SERVICE_URL, 
     changeOrigin: true,
+    timeout: 5000,
     onError: (err, req, res) => {
         console.error('Proxy error:', err);
         res.status(500).send('Proxy error occurred.');

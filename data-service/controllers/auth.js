@@ -1,7 +1,10 @@
 const moment = require('moment');
 const db = require('../database/createDatabase');
-const bcrypt = require('bcryptjs')
-const AuthService = require('../services/authService')
+const bcrypt = require('bcryptjs');
+const AuthService = require('../services/authService');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+
 
 const signUpController = async (req, res) => {
     try {
@@ -51,8 +54,8 @@ const loginController = async (req, res) => {
               return res.status(401).json({ Status: "Error", Error: "Wrong email or password." });
             } 
 
-            return res.status(200).json({message: "Success", data: data[0].username})
-
+            const token = jwt.sign(req.body, process.env.JWT_SECRET, {expiresIn: '2h' });
+            return res.status(200).json({message: "Success", data: data[0].username, token: token})
         }) 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });

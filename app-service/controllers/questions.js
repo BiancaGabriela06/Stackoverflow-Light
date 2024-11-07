@@ -54,7 +54,9 @@ const deleteQuestion = async (req, res) => {
 const voteQuestion = async (req, res) => {
     try {
         const response = await axios.post(`${process.env.DATA_SERVICE_URL}/questions/vote/${req.params.id}`,  req.body, {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+             },
         });
         res.status(response.status).send(response.data);
     } catch (error) {
