@@ -151,3 +151,7 @@ For obtaining JWT_SECRET run in terminal command
  openssl rand -base64 64
 
 Copy that and put it in app-service/env
+
+
+![image](https://github.com/user-attachments/assets/2b965b32-3a1b-4090-82bf-0672a2ff7ffd)
+
