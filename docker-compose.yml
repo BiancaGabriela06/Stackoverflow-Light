@@ -1,5 +1,3 @@
-version: '3.8'  # Specify the version of Docker Compose
-
 services:
   mysql:
     image: mysql:8.4
@@ -24,8 +22,8 @@ services:
     volumes: 
       - 'C:/Users/bianc/Desktop/Stackoverflow-Light/data-service:/usr/src/app'
     environment:
-      DB_HOST: mysql  # This should be the service name
-      DB_PORT: 3306  # Use the internal MySQL port
+      DB_HOST: mysql  
+      DB_PORT: 3306 
       DB_NAME: personaldb
       DB_USER: root
       DB_PASSWORD: mysql123

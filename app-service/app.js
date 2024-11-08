@@ -13,6 +13,7 @@ app.use((req, res, next) => {
     next();
 });
 
+/// for authentication, auth-service is a middleware between app-service and data-service
 app.use('/auth', createProxyMiddleware({
     target: process.env.AUTH_SERVICE_URL, 
     changeOrigin: true,

@@ -1,5 +1,7 @@
 const MetricsService = require('../services/metricsService');
 
+///Using MetricsService that provides the necessary queries
+
 const popularDay = async (req, res) => {
     try {
         const result = await MetricsService.getPopularDayOfWeek();

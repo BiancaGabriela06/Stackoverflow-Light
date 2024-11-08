@@ -1,6 +1,8 @@
 const moment = require('moment');
 const QuestionsService = require('../services/questionsService');
 
+///Using QuestionService that provides the necessary queries
+
 const insertQuestion = async (req, res) => {
    try {
         const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');

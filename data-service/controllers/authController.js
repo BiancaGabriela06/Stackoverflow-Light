@@ -5,6 +5,7 @@ const AuthService = require('../services/authService');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
+///Using AuthService that provides the necessary queries
 
 const signUpController = async (req, res) => {
     try {

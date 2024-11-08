@@ -3,6 +3,8 @@ const {createUsersTable, createQuestionsTable, createAnswersTable, createVotesTa
 
 require('dotenv').config();
 
+///Connecting to the database and creating if it's mandatory the tables 
+
 const db = mysql.createConnection({
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,   

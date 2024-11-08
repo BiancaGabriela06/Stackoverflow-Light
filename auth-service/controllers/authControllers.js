@@ -7,6 +7,7 @@ const path = require('path');
 const dirPath = path.join(__dirname, '../helpers'); 
 const filePath = path.join(dirPath, 'jwt-token.json')
 
+///Data is sent to data-service that manage database
 
 const signUpController = async (req, res) => {
     const errors = validationResult(req);
@@ -94,9 +95,6 @@ const forgotPasswordController = async (req, res) => {
      }
 }
 
-const deleteAccountController = (req, res) => {
-    console.log("deleteAccountController")
-}
 
 module.exports = {
     signUpController,

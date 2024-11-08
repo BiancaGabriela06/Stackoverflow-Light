@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 
-const authenticate = (req, res, next) => {
+const authorization = (req, res, next) => {
   const token = req.headers['authorization'];
 
   if (!token) {
@@ -21,4 +21,4 @@ const authenticate = (req, res, next) => {
   });
 };
 
-module.exports = authenticate;
+module.exports = authorization;

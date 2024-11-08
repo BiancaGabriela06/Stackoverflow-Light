@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+//Data is sent to the data-service that manage database
 const getQuestions = async (req, res) => {
     try {
         const response = await axios.get(`${process.env.DATA_SERVICE_URL}/questions/all`, {

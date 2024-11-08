@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 
+//Validation of the req.body parameters for register
 const signUpValidation = [
     body('email').isEmail().withMessage('Must be a valid email'),
     body('name').notEmpty().isLength({ min: 6 }).withMessage('Username must have at least 6 characters'),
@@ -17,11 +18,13 @@ const signUpValidation = [
         })
 ];
 
+//Validation of the req.body parameters for login
 const loginValidation = [
     body('email').notEmpty().isEmail().withMessage('Must be a valid email'),
     body('password').notEmpty()
 ]
 
+//Validation of the req.body parameters for changing the password
 const forgotPasswordValidation = [
     body('email').notEmpty().isEmail().withMessage('Must be a valid email'),
     body('newPassword')
