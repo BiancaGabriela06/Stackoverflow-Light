@@ -40,6 +40,7 @@ The `docker-compose.yml` file is configured to set up the necessary services:
 - Data Service: http://localhost:8000
 
 ## API Endpoints
+To test the routes I used VSC Extension Thunder.
 
 ### Questions
 
@@ -126,11 +127,10 @@ The `docker-compose.yml` file is configured to set up the necessary services:
 ### Votes
 
 - **POST** `/votes/{id}`
-  - **Description**: Adds a vote to a question.
+  - **Description**: Adds a vote to a question. A user can have just one vote and he can change it.
   - **Request Body**:
     ```json
     {
-      "question_id": 1,
       "user_id": 2,
       "vote_type": 0  // can be 1 for 'upvote' or 0 for 'downvote'
     }
@@ -138,6 +138,9 @@ The `docker-compose.yml` file is configured to set up the necessary services:
   - **Response**:
     - `201 Created` if the vote is successfully added.
     - `400 Bad Request` if the data is invalid.
+### Metrics
+-**GET** `/metrics/popular-day`
+![image](https://github.com/user-attachments/assets/1ab8ed3b-d3c0-47fc-9ce1-7dd0b8332f17)
 
 
 ## JWT Token
