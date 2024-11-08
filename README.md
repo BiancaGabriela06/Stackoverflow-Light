@@ -140,18 +140,28 @@ The `docker-compose.yml` file is configured to set up the necessary services:
     - `400 Bad Request` if the data is invalid.
 
 
-## Running Unit Tests in Data Service
-To run unit tests in the data-service, use the following command: 
-
-*cd data-service*
-*npm test*
-
 ## JWT Token
 For obtaining JWT_SECRET run in terminal command
  openssl rand -base64 64
 
 Copy that and put it in app-service/env
 
+When the user is login succcessfully in application, the backend sends a token created with jwt.
 
 ![image](https://github.com/user-attachments/assets/2b965b32-3a1b-4090-82bf-0672a2ff7ffd)
+
+This token needs to be put in headers -> authorization to access a route.
+![image](https://github.com/user-attachments/assets/8e69da0f-46b5-43aa-ac6d-b1939ade3885)
+![image](https://github.com/user-attachments/assets/330bd1a6-de92-46c0-b6d9-7c87077e6f7d)
+
+## Running Unit Tests in Data Service
+To run unit tests in the data-service, use the following command: 
+
+*cd data-service*
+*npm test*
+
+
+
+
+
 
