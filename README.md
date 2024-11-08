@@ -40,6 +40,7 @@ The `docker-compose.yml` file is configured to set up the necessary services:
 - Data Service: http://localhost:8000
 
 ## API Endpoints
+To test the routes I used VSC Extension Thunder.
 
 ### Questions
 
@@ -126,11 +127,10 @@ The `docker-compose.yml` file is configured to set up the necessary services:
 ### Votes
 
 - **POST** `/votes/{id}`
-  - **Description**: Adds a vote to a question.
+  - **Description**: Adds a vote to a question. A user can have just one vote and he can change it.
   - **Request Body**:
     ```json
     {
-      "question_id": 1,
       "user_id": 2,
       "vote_type": 0  // can be 1 for 'upvote' or 0 for 'downvote'
     }
@@ -138,7 +138,24 @@ The `docker-compose.yml` file is configured to set up the necessary services:
   - **Response**:
     - `201 Created` if the vote is successfully added.
     - `400 Bad Request` if the data is invalid.
+### Metrics
+-**GET** `/metrics/popular-day`
+![image](https://github.com/user-attachments/assets/1ab8ed3b-d3c0-47fc-9ce1-7dd0b8332f17)
 
+
+## JWT Token
+For obtaining JWT_SECRET run in terminal command
+ openssl rand -base64 64
+
+Copy that and put it in app-service/env
+
+When the user is login succcessfully in application, the backend sends a token created with jwt.
+
+![image](https://github.com/user-attachments/assets/2b965b32-3a1b-4090-82bf-0672a2ff7ffd)
+
+This token needs to be put in headers -> authorization to access a route.
+![image](https://github.com/user-attachments/assets/8e69da0f-46b5-43aa-ac6d-b1939ade3885)
+![image](https://github.com/user-attachments/assets/330bd1a6-de92-46c0-b6d9-7c87077e6f7d)
 
 ## Running Unit Tests in Data Service
 To run unit tests in the data-service, use the following command: 
@@ -146,8 +163,8 @@ To run unit tests in the data-service, use the following command:
 *cd data-service*
 *npm test*
 
-## JWT Token
-For obtaining JWT_SECRET run in terminal command
- openssl rand -base64 64
 
-Copy that and put it in app-service/env
+
+
+
+
