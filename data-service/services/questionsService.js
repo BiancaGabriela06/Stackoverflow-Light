@@ -1,7 +1,7 @@
 const db = require('../database/createDatabase');
 
 const QuestionsService = {
-    insertQuestion: (question) => {
+    insertQuestion: async (question) => {
         return new Promise((resolve, reject) => {
             db.query(
                 'INSERT INTO questions (user_id, text, created_at) VALUES (?, ?, ?)',
@@ -15,7 +15,7 @@ const QuestionsService = {
             );
         });
     },
-    getQuestions: () => {
+    getQuestions: async () => {
         return new Promise((resolve, reject) => {
             db.query(
                 `Select 
@@ -45,7 +45,7 @@ const QuestionsService = {
             );
         });
     },
-    getQuestion: (id) => {
+    getQuestion: async (id) => {
         return new Promise((resolve, reject) => {
             db.query(
                 `Select 
@@ -79,7 +79,7 @@ const QuestionsService = {
             );
         });
     },
-    getQuestionAnswers: (id) => {
+    getQuestionAnswers: async (id) => {
         return new Promise((resolve, reject) => {
             db.query(
                 `SELECT 
@@ -101,7 +101,7 @@ const QuestionsService = {
             );
         });
     },
-    deleteQuestion: (id) => {
+    deleteQuestion: async (id) => {
         return new Promise((resolve, reject) => {
             db.query(
                 'Delete from questions where id = ?', [id], (err, result) => {
@@ -113,20 +113,45 @@ const QuestionsService = {
             );
         });
     },
-    voteQuestion: (vote) => {
+    voteQuestion: async (vote) => {
         return new Promise((resolve, reject) => {
             db.query(
-                'Insert into votes (user_id, question_id, type_vote, created_at) VALUES (?,?,?,?)', 
-                [vote.user_id, vote.question_id, vote.type, vote.createdAt], (err, result) => {
+                'SELECT * FROM votes WHERE user_id = ? AND question_id = ?',
+                [vote.user_id, vote.question_id],
+                (err, result) => {
                     if (err) {
                         return reject(err);
                     }
-                    resolve(result);
+
+                    if (result.length > 0) {
+                        db.query(
+                            'UPDATE votes SET type_vote = ?, created_at = ? WHERE user_id = ? AND question_id = ?',
+                            [vote.type, vote.createdAt, vote.user_id, vote.question_id],
+                            (err, updateResult) => {
+                                if (err) {
+                                    return reject(err);
+                                }
+                                resolve(updateResult); 
+                            }
+                        );
+                    } else {
+                        db.query(
+                            'INSERT INTO votes (user_id, question_id, type_vote, created_at) VALUES (?, ?, ?, ?)',
+                            [vote.user_id, vote.question_id, vote.type, vote.createdAt],
+                            (err, insertResult) => {
+                                if (err) {
+                                    return reject(err);
+                                }
+                                resolve(insertResult); 
+                            }
+                        );
+                    }
                 }
             );
         });
     },
-    answerQuestion: (answer) => {
+
+    answerQuestion: async (answer) => {
         return new Promise((resolve, reject) => {
             db.query(
                 'Insert into answers (user_id, question_id, text, created_at) VALUES (?,?,?,?)', 

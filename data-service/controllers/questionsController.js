@@ -68,7 +68,7 @@ const addVoteQuestion = async (req, res) => {
         const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
         const vote = {
             question_id: req.params.id,
-            type: req.body.type,
+            type: req.body.type_vote,
             user_id: req.body.user_id,
             createdAt: createdAt
         }

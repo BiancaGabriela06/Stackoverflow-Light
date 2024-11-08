@@ -1,7 +1,7 @@
 const db = require('../database/createDatabase');
 
 const AuthService = {
-    findUserByEmail: (email) => {
+    findUserByEmail: async (email) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [email], (err, result) => {
                 if (err) {
@@ -11,7 +11,7 @@ const AuthService = {
             });
         });
     },
-    createUser: (user) => {
+    createUser: async (user) => {
         return new Promise((resolve, reject) => {
             db.query(
                 'INSERT INTO users (username, email, password, created_at) VALUES (?, ?, ?, ?)',

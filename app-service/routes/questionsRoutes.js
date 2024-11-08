@@ -1,13 +1,13 @@
 const express = require('express');
-const authenticate = require('../middleware/authenticate');
+const authorization = require('../middleware/authorization');
 const questionsController = require('../controllers/questionsController');
 const router = express.Router();
 
-router.get('/all', authenticate, questionsController.getQuestions);
-router.get('/:id', authenticate, questionsController.getQuestion);
-router.post('/add', authenticate, questionsController.insertQuestion);
-router.delete('/delete/:id', authenticate,  questionsController.deleteQuestion);
-router.post('/vote/:id', authenticate, questionsController.voteQuestion);
-router.post('/answer/:id', authenticate, questionsController.answerQuestion);
+router.get('/all', authorization, questionsController.getQuestions);
+router.get('/:id', authorization, questionsController.getQuestion);
+router.post('/add', authorization, questionsController.insertQuestion);
+router.delete('/delete/:id', authorization,  questionsController.deleteQuestion);
+router.post('/vote/:id', authorization, questionsController.voteQuestion);
+router.post('/answer/:id', authorization, questionsController.answerQuestion);
 
 module.exports = router;

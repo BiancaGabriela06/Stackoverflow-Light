@@ -14,7 +14,7 @@ const popularDay = async (req, res) => {
 
 const averageVotes = async (req, res) => {
         try {
-            const response = await axios.get(`${process.env.DATA_SERVICE_URL}/metrics/average-votes/${id}`, {
+            const response = await axios.get(`${process.env.DATA_SERVICE_URL}/metrics/average-votes/${req.params.id}`, {
                 headers: { 'Content-Type': 'application/json' },
             });
             res.status(response.status).send(response.data);
