@@ -16,7 +16,7 @@ const config = {
   baseURL: process.env.AUTH_SERVICE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
   clientSecret: process.env.AUTH0_CLIENT_SECRET,
-  issuerBaseURL: process.env.AUTH0_DOMAIN,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   session: {
     rolling: true,
     absoluteDuration: 3600, 

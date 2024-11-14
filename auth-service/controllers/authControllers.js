@@ -100,5 +100,4 @@ module.exports = {
     signUpController,
     loginController,
     forgotPasswordController,
-    deleteAccountController,
 };
